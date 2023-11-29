@@ -1,0 +1,21 @@
+from scipy.optimize import minimize
+
+# Define the dimensional equation
+def dimensional_equation(exponents, variables):
+    v, D, rho, mu = variables
+    a, b, c = exponents
+    return v - D**a * rho**b * mu**c
+
+# Initial guesses for exponents
+initial_guesses = [1, 1, 1]
+
+# Variables: [v, D, rho, mu]
+variables = [1, 1, 1, 1]  # You can put any initial values here
+
+# Use scipy's minimize function to solve for exponents
+result = minimize(dimensional_equation, initial_guesses, args=(variables,), method='Nelder-Mead')
+
+# Extract the optimized exponents
+optimized_exponents = result.x
+
+print("Optimized Exponents:", optimized_exponents)
